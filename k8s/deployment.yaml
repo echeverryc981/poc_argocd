@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-api
-  labels:
-    app: hello-api
+  namespace: qa-poc-ns
 spec:
   replicas: 1
   selector:
@@ -15,10 +14,13 @@ spec:
         app: hello-api
     spec:
       containers:
-      - name: hello-api
-        image: docker.io/echeverryc981/hello-api:1.0
-        ports:
-        - containerPort: 5000
-        envFrom:
-        - configMapRef:
-            name: hello-api-config
+        - name: hello-api
+          image: echeverryc981/hello-api:latest   # tu imagen en DockerHub
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MENSAJE
+              valueFrom:
+                configMapKeyRef:
+                  name: poc-config
+                  key: mensaje
