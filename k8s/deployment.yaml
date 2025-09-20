@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hello-api
-          image: echeverryc981/hello-api:1.0  # tu imagen en DockerHub
+          image: echeverryc981/hello-api:1.1  # tu imagen en DockerHub
           ports:
             - containerPort: 5000
           env:
