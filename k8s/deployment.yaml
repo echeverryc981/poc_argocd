@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-api
+  labels:
+    app: hello-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-api
+  template:
+    metadata:
+      labels:
+        app: hello-api
+    spec:
+      containers:
+      - name: hello-api
+        image: docker.io/echeverryc981/hello-api:1.0
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: hello-api-config
